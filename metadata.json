@@ -1,0 +1,6 @@
+{
+  "name": "Weekly Lesson Schedule",
+  "description": "A premium, responsive weekly private lesson planner with automatic timetable generation, conflict detection, a vertical today-timeline, calendar view, statistics, and professional print/export features in the Apple Liquid Glass design language.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

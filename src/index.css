@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Cairo", "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --animate-liquid-blob-1: drift-1 25s ease-in-out infinite;
+  --animate-liquid-blob-2: drift-2 30s ease-in-out infinite;
+  --animate-liquid-blob-3: drift-3 20s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-glass-reflection: shine 6s infinite linear;
+}
+
+@keyframes drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.15); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+@keyframes drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-40px, 40px) scale(0.85); }
+  75% { transform: translate(20px, -30px) scale(1.1); }
+}
+
+@keyframes drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, 50px) scale(1.2); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.4), 0 0 20px rgba(168, 85, 247, 0.2);
+    border-color: rgba(6, 182, 212, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(6, 182, 212, 0.8), 0 0 40px rgba(168, 85, 247, 0.4);
+    border-color: rgba(168, 85, 247, 0.8);
+  }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-150%) rotate(25deg); }
+  50% { transform: translateX(150%) rotate(25deg); }
+  100% { transform: translateX(150%) rotate(25deg); }
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Extra Liquid gloss sheen */
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.glass-panel-heavy {
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .glass-panel-heavy {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-button {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark .glass-button:hover {
+  background: rgba(30, 41, 59, 0.75);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(6, 182, 212, 0.6);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+}
+
+.dark .glass-input {
+  background: rgba(15, 23, 42, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark .glass-input:focus {
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(168, 85, 247, 0.6);
+}
+
+/* Light Mode / Dark Mode background settings */
+body {
+  font-family: var(--font-sans);
+  background-color: #0c0f1d;
+  color: #f8fafc;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+body.light {
+  background-color: #f0f4f9;
+  color: #1e293b;
+}
+
+/* Light mode overrides for gorgeous contrast, premium fonts, and high legibility */
+body.light {
+  --font-sans: "Cairo", "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* 1. Glass cards adjustment for crisp, modern light mode */
+body.light .glass-panel {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05) !important;
+}
+
+body.light .glass-panel-heavy {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 12px 40px 0 rgba(15, 23, 42, 0.08) !important;
+}
+
+body.light .glass-input {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  color: #0f172a !important;
+}
+
+body.light .glass-input:focus {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(6, 182, 212, 0.6) !important;
+}
+
+body.light .glass-button {
+  background: rgba(15, 23, 42, 0.05) !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  color: #1e293b !important;
+}
+
+body.light .glass-button:hover {
+  background: rgba(15, 23, 42, 0.1) !important;
+}
+
+/* 2. Overriding hardcoded light slate texts with rich, deep contrasts */
+body.light .text-slate-100,
+body.light .text-slate-200,
+body.light .text-slate-300 {
+  color: #1e293b !important;
+}
+
+body.light .text-slate-400,
+body.light .text-slate-500 {
+  color: #576071 !important;
+}
+
+body.light .text-slate-600 {
+  color: #475569 !important;
+}
+
+/* Titles and headings should be high-contrast charcoal */
+body.light h1,
+body.light h2,
+body.light h3,
+body.light h4,
+body.light h5,
+body.light h6 {
+  color: #0f172a !important;
+}
+
+/* Make sure text elements in glass panels are dark, except inside colored elements */
+body.light .glass-panel text,
+body.light .glass-panel p,
+body.light .glass-panel span:not(.bg-cyan-400):not(.bg-teal-400):not(.bg-indigo-500):not(.bg-purple-500):not(.bg-pink-500):not(.bg-rose-500) {
+  color: #1e293b;
+}
+
+/* Specific button text fixes */
+body.light .bg-gradient-to-r,
+body.light .bg-gradient-to-tr,
+body.light button.bg-gradient-to-r *,
+body.light button.bg-gradient-to-tr * {
+  color: #ffffff !important;
+}
+
+/* Subtle accent background blobs in light mode */
+body.light .bg-gradient-to-tr[class*="from-cyan-400"] {
+  background-image: linear-gradient(to top right, rgba(6, 182, 212, 0.12), rgba(20, 184, 166, 0.03)) !important;
+}
+
+body.light .bg-gradient-to-br[class*="from-indigo-500"] {
+  background-image: linear-gradient(to bottom right, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.05)) !important;
+}
+
+/* Custom reflective shines across glass cards */
+.liquid-card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-card-shine::after {
+  content: '';
+  position: absolute;
+  top: -150%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    30deg,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.07) 50%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  transition: transform 0.6s ease;
+}
+
+.liquid-card-shine:hover::after {
+  transform: translate(50%, 50%) rotate(25deg);
+}
+
+/* Custom Scrollbar for Liquid UI */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Conflict Ring Pulse */
+.conflict-pulse {
+  animation: border-pulse 1.5s infinite;
+}
+
+@keyframes border-pulse {
+  0%, 100% { border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); }
+  50% { border-color: rgba(239, 68, 68, 1); box-shadow: 0 0 8px 2px rgba(239, 68, 68, 0.4); }
+}
+
+/* Responsive Printable Timetable Styles */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-area {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 1cm !important;
+    background: white !important;
+    box-shadow: none !important;
+    color: black !important;
+  }
+
+  .print-table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  .print-table th, .print-table td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    font-size: 10pt !important;
+  }
+
+  .print-card {
+    border: 1px solid #ccc !important;
+    background: #fdfdfd !important;
+    color: black !important;
+    box-shadow: none !important;
+    border-radius: 4px !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Force color printing if possible */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
